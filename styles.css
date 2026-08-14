@@ -1,0 +1,973 @@
+:root{--navy:#080a28;--navy2:#0d1040;--purple:#6d42ff;--purple2:#9c6bff;--lav:#e9e4ff;--cyan:#21d2ff;--mint:#65ffbf;--orange:#ff9d4b;--white:#fff;--text:#f8f7ff;--muted:#bbb5e5;--glass:rgba(255,255,255,.075);--line:rgba(178,139,255,.28);--shadow:0 30px 90px rgba(0,0,0,.45);}
+*{box-sizing:border-box} html,body{height:100%;margin:0;overflow:hidden;background:var(--navy);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif} body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 80% 10%,rgba(109,66,255,.55),transparent 36%),radial-gradient(circle at 12% 82%,rgba(33,210,255,.16),transparent 30%),linear-gradient(135deg,#05061d 0%,#090b32 48%,#100837 100%)} body::after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(180deg,transparent 0%,black 20%,black 80%,transparent 100%)}
+.app{position:relative;width:100vw;height:100vh;overflow:hidden} .topbar{position:fixed;z-index:50;top:0;left:0;right:0;height:76px;display:flex;align-items:center;justify-content:space-between;padding:18px 34px;background:linear-gradient(180deg,rgba(6,7,30,.84),rgba(6,7,30,.36) 70%,transparent);backdrop-filter:blur(16px)} .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.035em;font-size:29px} .brand-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--purple),#a06bff);display:grid;place-items:center;box-shadow:0 0 26px rgba(109,66,255,.5);font-size:18px} .nav{display:flex;align-items:center;gap:9px} .nav button,.ghost-link,.cta{border:1px solid rgba(255,255,255,.18);color:var(--text);background:rgba(255,255,255,.07);border-radius:999px;padding:10px 14px;font-weight:700;cursor:pointer;transition:.25s;text-decoration:none;font-size:16px} .nav button:hover,.ghost-link:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)} .cta{background:linear-gradient(135deg,var(--purple),#8d5dff);border:none;box-shadow:0 12px 32px rgba(109,66,255,.38)} .cta:hover{transform:translateY(-2px);box-shadow:0 18px 44px rgba(109,66,255,.55)}
+.track{height:100%;transition:transform .85s cubic-bezier(.2,.8,.15,1);will-change:transform} section.slide{position:relative;width:100vw;height:100vh;padding:96px 64px 46px;overflow:hidden;display:flex;align-items:center;justify-content:center} .slide-inner{width:min(1280px,100%);height:min(790px,calc(100vh - 136px));position:relative} .slide .animate{opacity:0;transform:translateY(18px);transition:.7s ease} .slide.active .animate{opacity:1;transform:none} .slide.active .animate:nth-child(2){transition-delay:.08s} .slide.active .animate:nth-child(3){transition-delay:.16s} .slide.active .animate:nth-child(4){transition-delay:.24s}
+.eyebrow{display:inline-flex;gap:9px;align-items:center;padding:9px 13px;border-radius:999px;background:rgba(109,66,255,.16);border:1px solid rgba(156,107,255,.38);color:#b994ff;font-size:15px;font-weight:900;letter-spacing:.09em;text-transform:uppercase} h1,h2,h3{margin:0;letter-spacing:-.055em;line-height:.97} h1{font-size:clamp(57px,8vw,121px)} h2{font-size:clamp(43px,5vw,77px)} h3{font-size:clamp(29px,3vw,49px)} p{color:var(--muted);line-height:1.5;font-size:20px;margin:0} .grad{background:linear-gradient(135deg,#fff 0%,#cbb7ff 38%,#8f66ff 72%,#37d5ff 100%);-webkit-background-clip:text;color:transparent} .card{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.045));border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--shadow);backdrop-filter:blur(20px)} .label{color:#9d83ff;font-size:14px;font-weight:900;letter-spacing:.14em;text-transform:uppercase} .metric{font-size:55px;font-weight:950;letter-spacing:-.05em;color:#fff} .muted{color:var(--muted)} .cyan{color:var(--cyan)} .purple{color:var(--purple2)}
+.orb{position:absolute;border-radius:50%;opacity:.85} .orb.one{width:420px;height:420px;background:radial-gradient(circle,rgba(109,66,255,.33),transparent 66%);right:-150px;top:50px} .orb.two{width:320px;height:320px;background:radial-gradient(circle,rgba(33,210,255,.16),transparent 66%);left:-90px;bottom:-90px}
+/* Slide 1 */
+.hero{display:grid;grid-template-columns:1.06fr .94fr;gap:48px;align-items:center;height:100%} .hero-copy{max-width:680px} .hero-copy h1{font-size:clamp(65px,7.3vw,111px)} .country-line{margin-top:22px;color:#eae7ff;font-weight:750;line-height:1.8} .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px} .stat{padding:20px;border-radius:22px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.1)} .stat strong{display:block;font-size:41px;line-height:1;margin-bottom:9px} .stat span{font-size:16px;color:#d9d5ef;font-weight:700} .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px} .hero-art{height:100%;display:grid;place-items:center;position:relative} .hero-ring{width:min(470px,38vw);aspect-ratio:1;border-radius:50%;border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;background:radial-gradient(circle,rgba(109,66,255,.20),rgba(8,10,40,.10) 56%,transparent 70%);box-shadow:inset 0 0 80px rgba(109,66,255,.16),0 0 80px rgba(33,210,255,.08)} .hero-ring::before,.hero-ring::after{content:"";position:absolute;border-radius:50%;border:1px dashed rgba(156,107,255,.35)} .hero-ring::before{width:70%;height:70%} .hero-ring::after{width:96%;height:96%} .doer-mark{font-size:121px;font-weight:950;letter-spacing:-.11em;line-height:.8;text-align:center} .doer-mark small{display:block;font-size:19px;letter-spacing:.2em;color:#b994ff;margin-top:22px;text-transform:uppercase}
+/* Slide 2 */
+.partner-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;height:100%;align-items:center} .values{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px} .value-card{min-height:142px;display:flex;flex-direction:column;justify-content:space-between} .value-card strong{font-size:28px} .industry-wrap{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px} .industry{min-height:104px;padding:12px 8px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;color:#e7e3ff;font-size:15px;font-weight:700} .industry i{font-style:normal;font-size:27px}
+/* Slides 3-4 proof */
+.proof-title{text-align:center;margin-bottom:22px} .proof-pair{display:grid;grid-template-columns:1fr 1fr;gap:22px;height:calc(100% - 94px)} .proof{position:relative;overflow:hidden;display:grid;grid-template-rows:auto 88px 1fr auto auto;gap:16px;padding:26px} .proof::before{content:"";position:absolute;inset:auto -120px -180px auto;width:380px;height:380px;background:radial-gradient(circle,rgba(109,66,255,.24),transparent 68%)} .proof.lightish{background:linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,.07))} .logo{height:72px;max-width:72%;object-fit:contain;object-position:left center;background:white;border-radius:16px;padding:9px} .proof-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:stretch} .proof-metric{padding:16px;border-radius:18px;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;justify-content:center;text-align:center} .proof-metric b{font-size:47px;line-height:1} .proof-metric span{font-size:16px;color:#ddd8f7;font-weight:750;margin-top:8px} .anchor{font-size:29px;font-weight:950;line-height:1.17;border-top:1px solid rgba(255,255,255,.18);padding-top:16px} .tagrow{display:flex;gap:8px;flex-wrap:wrap} .tag{font-size:14px;border:1px solid rgba(255,255,255,.16);color:#dcd4ff;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.06)}
+/* Slide 5 */
+.ecosystem{height:100%;display:grid;grid-template-rows:auto 218px auto 1fr auto;gap:18px} .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px} .pillar{display:flex;flex-direction:column;justify-content:space-between;min-height:210px} .pillar-icon{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:35px;background:linear-gradient(135deg,rgba(109,66,255,.58),rgba(33,210,255,.16));border:1px solid rgba(255,255,255,.12)} .agent-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px} .agent-tile{min-height:106px;padding:15px 10px;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:5px} .agent-tile b{font-size:17px} .agent-tile span{font-size:14px;color:#bfb8e1}
+/* Slide 6 */
+.qs-overview{height:100%;display:grid;grid-template-rows:auto 210px 76px 100px auto;gap:16px} .qs-features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px} .qs-feature{display:flex;align-items:flex-end;position:relative;overflow:hidden} .qs-feature:nth-child(1){background:linear-gradient(135deg,#26246d,#3536a2)} .qs-feature:nth-child(2){background:linear-gradient(135deg,#5b41d8,#7b62f2)} .qs-feature:nth-child(3){background:linear-gradient(135deg,#0d8aa9,#21c2cf)} .qs-feature .icon{position:absolute;right:22px;top:10px;font-size:95px;opacity:.18} .qs-feature strong{font-size:30px} .pipeline{display:grid;grid-template-columns:repeat(3,1fr);gap:8px} .pipe{background:#2b5cff;border-radius:18px;display:grid;place-items:center;text-align:center;font-weight:900;position:relative} .pipe small{display:block;font-size:13px;letter-spacing:.14em;color:#c4d3ff;margin-top:3px} .overview-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px} .overview-stat{text-align:center;border-top:1px solid rgba(255,255,255,.16);padding-top:12px} .overview-stat b{font-size:43px} .overview-stat span{display:block;font-size:15px;color:#bcb5e8;font-weight:750}
+/* Slides 7-9 */
+.quick-grid{display:grid;grid-template-columns:.82fr 1.03fr 1.25fr;gap:18px;height:100%;align-items:stretch} .quick-left,.quick-scope,.quick-demo{height:100%;overflow:hidden} .quick-left{display:flex;flex-direction:column} .quick-title{font-size:47px;letter-spacing:-.05em;margin-top:12px} .quick-stats{display:grid;grid-template-columns:1fr;gap:10px;margin:18px 0} .qstat{padding:14px;border-radius:17px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09)} .qstat b{font-size:37px;display:block;line-height:1} .qstat span{font-size:15px;color:#c9c4e9;font-weight:750} .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px} .chip{padding:8px 9px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:14px;font-weight:700;color:#e5e0fb} .scope-list{display:flex;flex-direction:column;gap:8px;margin-top:15px} .scope-item{display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:center;padding:11px;border-radius:16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)} .scope-index{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--purple),#9a6bff);font-size:15px;font-weight:950} .scope-item b{font-size:18px} .fake-salesforce{height:252px;border-radius:20px;background:linear-gradient(180deg,#f8faff,#e8edff);color:#17203a;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);overflow:hidden;position:relative;margin-top:14px} .fake-top{height:38px;background:#0875d1;display:flex;gap:6px;align-items:center;padding:0 14px} .fake-dot{width:9px;height:9px;border-radius:50%;background:#d8ebff} .fake-body{display:grid;grid-template-columns:86px 1fr;height:calc(100% - 38px)} .fake-side{background:#f0f4ff;border-right:1px solid #d8def3;padding:10px} .fake-line{height:9px;border-radius:999px;background:#cfd8f5;margin-bottom:10px} .fake-main{padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:9px} .fake-panel{border-radius:12px;background:white;box-shadow:0 8px 22px rgba(20,30,80,.1);padding:10px} .play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--cyan));display:grid;place-items:center;color:white;font-size:26px;box-shadow:0 0 40px rgba(109,66,255,.45)} .demo-labels{display:flex;gap:8px;margin:12px 0 0;flex-wrap:wrap} .demo-label{font-size:13px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;background:rgba(33,210,255,.13);border:1px solid rgba(33,210,255,.28);color:#78e8ff;padding:7px 9px;border-radius:999px} .mini-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px} .mini-flow div{text-align:center;padding:10px;border-radius:14px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.1)} .mini-flow b{font-size:15px} .mini-flow span{display:block;font-size:13px;color:#6fe7ff;margin-top:4px}
+/* Slide 10 */
+.co-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;height:100%} .steps{display:grid;grid-template-columns:1fr;gap:12px;margin-top:22px} .step{padding:16px;border-radius:18px;background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.09);display:grid;grid-template-columns:58px 1fr;gap:14px;align-items:center} .step b{font-size:27px;color:#9d83ff} .workshop{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%} .workshop img{width:210px;background:white;padding:12px;border-radius:16px;margin:18px 0}
+/* Slide 11 */
+.closing{height:100%;display:grid;place-items:center;text-align:center} .closing h1{font-size:clamp(67px,7.5vw,115px);max-width:900px} .closing p{max-width:760px;margin:20px auto} .footer-note{font-size:16px;color:#aca6d4;margin-top:26px}
+.progress{position:fixed;z-index:60;left:34px;bottom:30px;color:#bcb5e8;font-weight:800;font-size:16px} .section-title{position:fixed;z-index:60;right:34px;bottom:30px;color:#7f78aa;font-weight:700;font-size:15px} .hint{position:fixed;z-index:60;left:50%;transform:translateX(-50%);bottom:28px;color:#6e6797;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+@media(max-width:1050px){html,body{overflow:auto}.app{height:auto}.track{transform:none!important}section.slide{min-height:100vh;height:auto;padding:96px 22px 70px}.slide-inner{height:auto}.topbar{padding:14px 18px}.nav button{display:none}.hero,.partner-grid,.proof-pair,.quick-grid,.co-grid{grid-template-columns:1fr}.hero-art{display:none}.hero-stats,.industry-wrap,.agent-grid,.qs-features,.pipeline,.overview-stats{grid-template-columns:repeat(2,1fr)}.progress,.section-title,.hint{display:none}.proof-pair{height:auto}.proof{min-height:520px}.quick-left,.quick-scope,.quick-demo{height:auto}}
+
+/* Official Oktana branding */
+.brand-official{gap:0}
+.official-logo-shell{display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.96);border:1px solid rgba(255,255,255,.24);border-radius:13px;padding:7px 12px;box-shadow:0 10px 28px rgba(0,0,0,.20);backdrop-filter:blur(12px)}
+.official-logo{display:block;width:164px;height:auto;object-fit:contain}
+.hero-logo-card{width:min(390px,31vw);padding:30px 32px 24px;border-radius:30px;background:rgba(255,255,255,.96);box-shadow:0 26px 70px rgba(0,0,0,.34),0 0 55px rgba(109,66,255,.22);text-align:center;position:relative;z-index:2}
+.hero-logo-card img{width:100%;height:auto;display:block}
+.hero-logo-card small{display:block;margin-top:20px;font-size:19px;letter-spacing:.18em;color:#655fd6;font-weight:900;text-transform:uppercase}
+.footer-brand{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:24px}
+.footer-logo-shell{padding:5px 9px;border-radius:10px}
+.footer-logo-shell .official-logo{width:124px}
+@media(max-width:1050px){.official-logo{width:138px}.hero-logo-card{width:min(390px,76vw)}}
+
+
+/* v5 refinements */
+
+/* Modern embedded line icons */
+.line-icon{width:100%;height:100%;display:block}
+
+/* Slide 2: Industry section aligned visually with "Por qué Oktana" */
+.industry-section{align-self:center;padding:6px 0}
+.industry-section>.eyebrow{font-size:16px;padding:11px 16px}
+.industry-wrap{grid-template-columns:repeat(5,1fr)!important;gap:14px!important;margin-top:20px!important}
+.industry{min-height:118px!important;padding:14px 10px!important;gap:10px!important;font-size:15px!important;border-radius:22px!important;transition:transform .25s ease,background .25s ease,border-color .25s ease}
+.industry:hover{transform:translateY(-4px);background:rgba(109,66,255,.14);border-color:rgba(156,107,255,.42)}
+.industry-icon{width:38px;height:38px;display:grid;place-items:center;color:#a88cff;padding:7px;border-radius:12px;background:linear-gradient(135deg,rgba(109,66,255,.24),rgba(33,210,255,.10));border:1px solid rgba(156,107,255,.24)}
+.industry:nth-child(3n) .industry-icon{color:#38d9ee}
+.industry:nth-child(4n) .industry-icon{color:#7b91ff}
+.industry-name{line-height:1.15}
+
+/* Slides 3 & 4: fully centered proof content */
+.proof-centered .proof-title{text-align:center}
+.proof-centered .proof{text-align:center}
+.proof-centered .proof>.eyebrow{justify-self:center}
+.proof-centered .logo{object-position:center center!important;margin-inline:auto}
+.proof-centered .tagrow{justify-content:center}
+.proof-centered .anchor{text-align:center}
+
+/* Slide 5: larger agent tiles and modern icons */
+.agent-grid{gap:14px!important}
+.agent-tile{min-height:126px!important;padding:14px 10px 12px!important;gap:7px!important;align-items:center}
+.agent-icon{width:40px;height:40px;padding:8px;border-radius:13px;display:grid;place-items:center;color:#b69cff;background:linear-gradient(135deg,rgba(109,66,255,.28),rgba(33,210,255,.11));border:1px solid rgba(156,107,255,.25);margin-bottom:1px}
+.agent-tile:nth-child(3n) .agent-icon{color:#3bd8e6}
+.agent-tile:nth-child(4n) .agent-icon{color:#7893ff}
+.agent-tile b{font-size:19px!important;line-height:1.05}
+.agent-tile span:not(.agent-icon){font-size:16px!important;line-height:1.15}
+
+/* Slide 6: slightly stronger typography */
+.qs-overview .eyebrow{font-size:16px}
+.qs-overview>div:first-child p{font-size:22px!important}
+.qs-feature strong{font-size:34px!important}
+.qs-feature p{font-size:21px!important;line-height:1.3}
+.pipe{font-size:19px}
+.pipe small{font-size:14px!important}
+.overview-stat b{font-size:47px!important}
+.overview-stat span{font-size:17px!important}
+.qs-overview>p:last-child{font-size:21px!important}
+
+@media(max-width:1050px){
+  .industry-wrap{grid-template-columns:repeat(2,1fr)!important}
+  .agent-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+
+/* v6 refinements */
+
+/* Slide 2 — equal industry cards for a cleaner, more harmonious grid */
+.industry-wrap{
+  display:grid !important;
+  grid-template-columns:repeat(5, minmax(0,1fr)) !important;
+  grid-auto-rows:146px !important;
+  gap:14px !important;
+  align-items:stretch !important;
+}
+.industry{
+  box-sizing:border-box !important;
+  width:100% !important;
+  height:146px !important;
+  min-height:146px !important;
+  max-height:146px !important;
+  margin:0 !important;
+  padding:12px 10px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  overflow:hidden !important;
+}
+.industry-icon{
+  flex:0 0 36px !important;
+  width:36px !important;
+  height:36px !important;
+  margin-bottom:10px !important;
+}
+.industry-name{
+  width:100% !important;
+  min-height:56px !important;
+  max-height:56px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  line-height:1.06 !important;
+  font-size:13px !important;
+  font-weight:700 !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+  hyphens:auto !important;
+  padding:0 2px !important;
+}
+
+/* Global helper text shown on every slide */
+.hint{
+  font-size:10px !important;
+  line-height:1.2 !important;
+  letter-spacing:.035em !important;
+  opacity:.62 !important;
+}
+
+@media(max-width:1050px){
+  .industry-wrap{
+    grid-template-columns:repeat(2, minmax(0,1fr)) !important;
+    grid-auto-rows:138px !important;
+  }
+  .industry{
+    height:138px !important;
+    min-height:138px !important;
+    max-height:138px !important;
+  }
+  .industry-name{
+    min-height:54px !important;
+    max-height:54px !important;
+    font-size:13px !important;
+  }
+}
+
+
+/* v8 — Slide 7 compact QuickStart + embedded Loom demos */
+.slide[data-title="SDR Agent"] .slide-inner.sdr-quick-grid{
+  height:auto !important;
+  max-height:calc(100vh - 170px) !important;
+  align-items:stretch !important;
+  align-content:center !important;
+}
+.slide[data-title="SDR Agent"] .quick-left,
+.slide[data-title="SDR Agent"] .quick-scope,
+.slide[data-title="SDR Agent"] .quick-demo{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+  padding:22px !important;
+}
+.slide[data-title="SDR Agent"] .quick-stats{
+  margin:14px 0 !important;
+  gap:8px !important;
+}
+.slide[data-title="SDR Agent"] .qstat{
+  padding:12px 14px !important;
+}
+.slide[data-title="SDR Agent"] .chips{
+  margin-top:9px !important;
+  gap:7px !important;
+}
+.slide[data-title="SDR Agent"] .scope-list{
+  margin-top:14px !important;
+  gap:8px !important;
+}
+.slide[data-title="SDR Agent"] .scope-item{
+  padding:10px 11px !important;
+}
+.loom-shell{
+  width:100%;
+  aspect-ratio:16/9;
+  margin-top:14px;
+  border-radius:20px;
+  overflow:hidden;
+  background:#07091f;
+  border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 18px 40px rgba(0,0,0,.28);
+  position:relative;
+}
+.loom-frame{
+  width:100%;
+  height:100%;
+  display:block;
+  border:0;
+  background:#07091f;
+}
+.loom-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:12px;
+}
+.loom-tab{
+  appearance:none;
+  border:1px solid rgba(33,210,255,.28);
+  color:#88ecff;
+  background:rgba(33,210,255,.09);
+  border-radius:999px;
+  padding:9px 10px;
+  font:inherit;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.22s ease;
+}
+.loom-tab:hover{
+  transform:translateY(-1px);
+  background:rgba(33,210,255,.16);
+}
+.loom-tab.active{
+  color:#fff;
+  border-color:rgba(156,107,255,.6);
+  background:linear-gradient(135deg,rgba(109,66,255,.82),rgba(33,210,255,.34));
+  box-shadow:0 8px 24px rgba(109,66,255,.20);
+}
+.loom-open-row{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:7px;
+}
+.loom-open{
+  color:#c8c1ff;
+  text-decoration:none;
+  font-size:12px;
+  font-weight:800;
+}
+.loom-open:hover{color:#fff}
+.sdr-mini-flow{
+  margin-top:10px !important;
+}
+.sdr-mini-flow div{
+  padding:9px 7px !important;
+}
+.sdr-chat{
+  margin:10px 0 0 !important;
+  color:#b9b2de;
+}
+@media(max-width:1050px){
+  .slide[data-title="SDR Agent"] .slide-inner.sdr-quick-grid{
+    max-height:none !important;
+  }
+}
+
+/* v9 — Slide 8 compact layout + embedded Sales Copilot Loom demo */
+.slide[data-title="Sales Copilot"] .slide-inner.sales-quick-grid{
+  height:auto !important;
+  max-height:calc(100vh - 170px) !important;
+  align-items:stretch !important;
+  align-content:center !important;
+}
+.slide[data-title="Sales Copilot"] .quick-left,
+.slide[data-title="Sales Copilot"] .quick-scope,
+.slide[data-title="Sales Copilot"] .quick-demo{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+  padding:22px !important;
+}
+.slide[data-title="Sales Copilot"] .quick-stats{
+  margin:14px 0 !important;
+  gap:8px !important;
+}
+.slide[data-title="Sales Copilot"] .qstat{
+  padding:12px 14px !important;
+}
+.slide[data-title="Sales Copilot"] .chips{
+  margin-top:9px !important;
+  gap:7px !important;
+}
+.slide[data-title="Sales Copilot"] .scope-list{
+  margin-top:14px !important;
+  gap:8px !important;
+}
+.slide[data-title="Sales Copilot"] .scope-item{
+  padding:10px 11px !important;
+}
+.sales-loom-shell{
+  margin-top:14px !important;
+}
+.sales-demo-badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:12px;
+  padding:9px 12px;
+  border-radius:999px;
+  border:1px solid rgba(33,210,255,.28);
+  color:#8deeff;
+  background:rgba(33,210,255,.10);
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.075em;
+}
+.sales-mini-flow{
+  margin-top:12px !important;
+}
+.sales-mini-flow div{
+  padding:10px 8px !important;
+}
+@media(max-width:1050px){
+  .slide[data-title="Sales Copilot"] .slide-inner.sales-quick-grid{
+    max-height:none !important;
+  }
+}
+
+/* v10 — Slide 9 compact Service Agent + embedded Loom demos */
+.slide[data-title="Service Agent"] .slide-inner.service-quick-grid{
+  height:auto !important;
+  max-height:calc(100vh - 170px) !important;
+  align-items:stretch !important;
+  align-content:center !important;
+}
+.slide[data-title="Service Agent"] .quick-left,
+.slide[data-title="Service Agent"] .quick-scope,
+.slide[data-title="Service Agent"] .quick-demo{
+  height:auto !important;
+  min-height:0 !important;
+  overflow:visible !important;
+  padding:22px !important;
+}
+.slide[data-title="Service Agent"] .quick-stats{
+  margin:14px 0 !important;
+  gap:8px !important;
+}
+.slide[data-title="Service Agent"] .qstat{
+  padding:12px 14px !important;
+}
+.slide[data-title="Service Agent"] .chips{
+  margin-top:9px !important;
+  gap:7px !important;
+}
+.slide[data-title="Service Agent"] .scope-list{
+  margin-top:14px !important;
+  gap:8px !important;
+}
+.slide[data-title="Service Agent"] .scope-item{
+  padding:10px 11px !important;
+}
+.service-loom-shell{
+  margin-top:14px !important;
+}
+.service-loom-tabs{
+  margin-top:12px !important;
+}
+.service-mini-flow{
+  margin-top:10px !important;
+}
+.service-mini-flow div{
+  padding:9px 7px !important;
+}
+.service-chat{
+  margin:10px 0 0 !important;
+  color:#b9b2de;
+}
+@media(max-width:1050px){
+  .slide[data-title="Service Agent"] .slide-inner.service-quick-grid{
+    max-height:none !important;
+  }
+}
+
+/* v11 — Slide 10: compact QR / Workshop card only */
+.slide[data-title="Construyamos Pipeline"] .workshop-card-compact{
+  align-self:center !important;
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  padding-top:28px !important;
+  padding-bottom:28px !important;
+}
+
+/* v12 fixed — Slide 1 updates only */
+.slide[data-title="We're Doers"] .hero-copy h1{
+  font-size: clamp(66px, 9vw, 130px) !important;
+  line-height: .9 !important;
+}
+.slide[data-title="We're Doers"] .hero-copy > p{
+  font-size: 23px !important;
+  line-height: 1.48 !important;
+  max-width: 720px !important;
+}
+.slide[data-title="We're Doers"] .hero-stats{
+  margin-top: 30px !important;
+}
+.slide[data-title="We're Doers"] .hero-stats .stat span{
+  line-height: 1.18 !important;
+}
+
+/* v13 — Slide 2 redesign with client logos and product logos */
+.slide[data-title="El socio que ejecuta"] .partner-grid-v2{
+  width:min(1400px, 94vw);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  justify-content:center;
+}
+.slide[data-title="El socio que ejecuta"] .partner-hero{
+  text-align:center;
+}
+.slide[data-title="El socio que ejecuta"] .partner-hero h2{
+  font-size:clamp(42px, 5vw, 68px);
+  line-height:.98;
+  margin:0;
+}
+.slide[data-title="El socio que ejecuta"] .partner-sub{
+  max-width:860px;
+  margin:12px auto 0;
+  font-size:18px;
+  color:#cfc8f8;
+  line-height:1.45;
+}
+.slide[data-title="El socio que ejecuta"] .values-v2{
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0,1fr));
+  gap:14px;
+}
+.slide[data-title="El socio que ejecuta"] .values-v2 .value-card{
+  padding:16px 18px;
+  text-align:center;
+  min-height:96px;
+}
+.slide[data-title="El socio que ejecuta"] .values-v2 .value-card strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:6px;
+}
+.slide[data-title="El socio que ejecuta"] .values-v2 .value-card span{
+  display:block;
+  color:#cfc8f8;
+  font-size:15px;
+  line-height:1.35;
+}
+.slide[data-title="El socio que ejecuta"] .catalogue-wrap{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:16px;
+}
+.slide[data-title="El socio que ejecuta"] .catalogue-card{
+  padding:16px;
+  border-radius:26px;
+  border:1px solid rgba(164,138,255,.22);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  box-shadow:0 18px 40px rgba(8,9,56,.22), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.slide[data-title="El socio que ejecuta"] .section-chip{
+  margin-bottom:14px;
+  display:inline-flex;
+}
+.slide[data-title="El socio que ejecuta"] .logo-grid{
+  display:grid;
+  gap:12px;
+}
+.slide[data-title="El socio que ejecuta"] .industries-logo-grid{
+  grid-template-columns:repeat(5, minmax(0,1fr));
+}
+.slide[data-title="El socio que ejecuta"] .products-logo-grid{
+  grid-template-columns:repeat(5, minmax(0,1fr));
+}
+.slide[data-title="El socio que ejecuta"] .logo-card{
+  border-radius:20px;
+  border:1px solid rgba(164,138,255,.18);
+  background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(245,247,255,.90)); box-shadow:0 12px 28px rgba(11,16,44,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+.slide[data-title="El socio que ejecuta"] .industry-logo-card{
+  min-height:92px;
+  padding:14px 12px;
+}
+.slide[data-title="El socio que ejecuta"] .product-logo-card{
+  min-height:120px;
+  padding:12px 10px 14px;
+  flex-direction:column;
+  gap:12px;
+}
+.slide[data-title="El socio que ejecuta"] .logo-card img{
+  max-width:84%;
+  max-height:42px;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(0,0,0,.12));
+}
+.slide[data-title="El socio que ejecuta"] .product-logo-card img{
+  max-height:38px;
+}
+.slide[data-title="El socio que ejecuta"] .product-tag{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 9px;
+  min-height:30px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.01em;
+  color:#ecf3ff;
+  background:linear-gradient(135deg, rgba(81,223,255,.28), rgba(128,102,255,.35));
+  border:1px solid rgba(128,102,255,.26);
+  white-space:normal;
+  line-height:1.15;
+  max-width:100%;
+  text-align:center;
+  overflow-wrap:anywhere;
+}
+@media (max-width: 1300px){
+  .slide[data-title="El socio que ejecuta"] .catalogue-wrap{
+    grid-template-columns:1fr;
+  }
+}
+@media (max-width: 1100px){
+  .slide[data-title="El socio que ejecuta"] .values-v2{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+  }
+  .slide[data-title="El socio que ejecuta"] .industries-logo-grid,
+  .slide[data-title="El socio que ejecuta"] .products-logo-grid{
+    grid-template-columns:repeat(4, minmax(0,1fr));
+  }
+}
+
+/* v16 — stronger proof/case-study labels */
+.slide[data-title="Resultados que Hablan"] .proof-title > .eyebrow,
+.slide[data-title="Datos confiables"] .proof-title > .eyebrow{
+  font-size:18px !important;
+  padding:12px 18px !important;
+  letter-spacing:.10em !important;
+  box-shadow:0 10px 28px rgba(109,66,255,.20);
+}
+
+.slide[data-title="Resultados que Hablan"] .proof > .eyebrow{
+  font-size:17px !important;
+  padding:11px 16px !important;
+  letter-spacing:.08em !important;
+  background:linear-gradient(135deg,rgba(109,66,255,.24),rgba(33,210,255,.12)) !important;
+  border-color:rgba(156,107,255,.48) !important;
+}
+
+
+
+/* v21 — Slide 5 agent cards rebalanced */
+.ecosystem .agent-grid{gap:14px}
+.ecosystem .agent-tile{
+  min-height:248px;
+  padding:10px 12px;
+  display:grid;
+  grid-template-rows:minmax(0,1fr) auto auto auto minmax(0,1fr);
+  justify-items:center;
+  align-items:center;
+  text-align:center;
+}
+.ecosystem .agent-tile .agent-illustration{
+  grid-row:2;
+  width:132px;
+  height:132px;
+  max-width:100%;
+  display:block;
+  object-fit:contain;
+  margin:0 auto;
+}
+.ecosystem .agent-tile b{
+  grid-row:3;
+  font-size:18px !important;
+  line-height:1.12;
+  display:block;
+  margin-top:10px;
+}
+.ecosystem .agent-tile .agent-dept{
+  grid-row:4;
+  display:block;
+  font-size:14px !important;
+  line-height:1.18;
+  color:#bfb8e1;
+  margin-top:3px;
+}
+
+/* v23 — Slide 6: reorder only from v21, preserving original content */
+.slide[data-title="Agentforce QuickStarts"] .qs-overview{
+  grid-template-rows:auto 128px 110px 150px auto !important;
+  gap:16px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-overview > div:first-child h2{
+  font-size:72px !important;
+  line-height:.96 !important;
+  margin-top:12px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-overview > div:first-child .eyebrow{
+  font-size:16px !important;
+  padding:10px 18px !important;
+  letter-spacing:.16em !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .pipeline{
+  gap:14px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .pipe{
+  min-height:128px !important;
+  font-size:30px !important;
+  border-radius:22px !important;
+  box-shadow:0 18px 40px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .pipe small{
+  font-size:15px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .overview-stat{
+  border-top:0 !important;
+  border-radius:20px !important;
+  padding:18px 16px !important;
+  background:rgba(255,255,255,.05) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .overview-stat b{
+  font-size:50px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .overview-stat span{
+  font-size:18px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-feature{
+  min-height:150px !important;
+  opacity:.92 !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-feature .icon{
+  font-size:72px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-feature strong{
+  font-size:25px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-feature p{
+  font-size:17px !important;
+}
+
+/* v25 — Slides 7, 8, 9: remove effort card and rebalance remaining stats */
+.slide[data-title="SDR Agent"] .quick-stats,
+.slide[data-title="Sales Copilot"] .quick-stats,
+.slide[data-title="Service Agent"] .quick-stats{
+  grid-template-columns:1fr !important;
+}
+
+/* v26 — Slides 7, 8, 9: slightly larger QuickStart cards */
+.slide[data-title="SDR Agent"] .slide-inner.quick-grid,
+.slide[data-title="Sales Copilot"] .slide-inner.quick-grid,
+.slide[data-title="Service Agent"] .slide-inner.quick-grid{
+  width:min(1450px,94vw) !important;
+  max-height:calc(100vh - 128px) !important;
+  gap:22px !important;
+  grid-template-columns:.86fr 1.08fr 1.34fr !important;
+}
+
+.slide[data-title="SDR Agent"] .quick-left,
+.slide[data-title="SDR Agent"] .quick-scope,
+.slide[data-title="SDR Agent"] .quick-demo,
+.slide[data-title="Sales Copilot"] .quick-left,
+.slide[data-title="Sales Copilot"] .quick-scope,
+.slide[data-title="Sales Copilot"] .quick-demo,
+.slide[data-title="Service Agent"] .quick-left,
+.slide[data-title="Service Agent"] .quick-scope,
+.slide[data-title="Service Agent"] .quick-demo{
+  padding:28px !important;
+  border-radius:32px !important;
+}
+
+.slide[data-title="SDR Agent"] .quick-title,
+.slide[data-title="Sales Copilot"] .quick-title,
+.slide[data-title="Service Agent"] .quick-title{
+  font-size:52px !important;
+}
+
+.slide[data-title="SDR Agent"] .quick-scope h3,
+.slide[data-title="SDR Agent"] .quick-demo h3,
+.slide[data-title="Sales Copilot"] .quick-scope h3,
+.slide[data-title="Sales Copilot"] .quick-demo h3,
+.slide[data-title="Service Agent"] .quick-scope h3,
+.slide[data-title="Service Agent"] .quick-demo h3{
+  font-size:52px !important;
+}
+
+.slide[data-title="SDR Agent"] .qstat,
+.slide[data-title="Sales Copilot"] .qstat,
+.slide[data-title="Service Agent"] .qstat{
+  padding:16px 18px !important;
+}
+
+.slide[data-title="SDR Agent"] .scope-item,
+.slide[data-title="Sales Copilot"] .scope-item,
+.slide[data-title="Service Agent"] .scope-item{
+  padding:12px 14px !important;
+}
+
+/* v30 — Slide 10: three-step process after removing extra steps */
+.slide[data-title="Construyamos Pipeline"] .steps{
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:16px !important;
+}
+.slide[data-title="Construyamos Pipeline"] .step{
+  grid-template-columns:1fr !important;
+  min-height:118px !important;
+  justify-items:center !important;
+  text-align:center !important;
+  padding:20px 18px !important;
+}
+.slide[data-title="Construyamos Pipeline"] .step b{
+  font-size:34px !important;
+}
+.slide[data-title="Construyamos Pipeline"] .step span{
+  font-size:20px !important;
+  font-weight:900 !important;
+}
+
+/* v34 — Slide 2 grouped product logos */
+.slide[data-title="El socio que ejecuta"] .catalogue-card.products-groups-shell{
+  padding:16px 14px 14px;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid{
+  grid-template-columns:repeat(6, minmax(0,1fr));
+  gap:10px;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card{
+  grid-column:span 2;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(1){
+  grid-column:1 / span 3;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(2){
+  grid-column:4 / span 3;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(3){
+  grid-column:1 / span 2;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(4){
+  grid-column:3 / span 2;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(5){
+  grid-column:5 / span 2;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(6){
+  grid-column:1 / span 2;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(7){
+  grid-column:3 / span 2;
+}
+.slide[data-title="El socio que ejecuta"] .grouped-products-grid > .product-group-card:nth-child(8){
+  grid-column:5 / span 2;
+}
+.slide[data-title="El socio que ejecuta"] .product-group-card{
+  min-height:118px;
+  padding:10px;
+  border-radius:20px;
+  border:1px solid rgba(164,138,255,.18);
+  background:linear-gradient(180deg, rgba(22,27,74,.82), rgba(11,17,48,.72));
+  box-shadow:0 12px 28px rgba(7,11,32,.20), inset 0 1px 0 rgba(255,255,255,.04);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  overflow:hidden;
+}
+.slide[data-title="El socio que ejecuta"] .product-group-title{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:30px;
+  padding:6px 8px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  color:#f7f4ff;
+  letter-spacing:.01em;
+  text-align:center;
+  background:linear-gradient(135deg, rgba(81,223,255,.22), rgba(128,102,255,.32));
+  border:1px solid rgba(128,102,255,.22);
+}
+.slide[data-title="El socio que ejecuta"] .product-group-logos{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:7px;
+  flex:1;
+  align-content:start;
+}
+.slide[data-title="El socio que ejecuta"] .product-group-card[data-count="2"] .product-group-logos,
+.slide[data-title="El socio que ejecuta"] .product-group-card[data-count="1"] .product-group-logos{
+  align-content:center;
+}
+.slide[data-title="El socio que ejecuta"] .product-logo-chip{
+  min-height:38px;
+  padding:6px 8px;
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.98), rgba(243,246,255,.94));
+  border:1px solid rgba(164,138,255,.12);
+  box-shadow:0 8px 18px rgba(11,16,44,.14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+.slide[data-title="El socio que ejecuta"] .product-logo-chip img{
+  width:auto;
+  height:auto;
+  max-width:100%;
+  max-height:22px;
+  object-fit:contain;
+  filter:none;
+}
+.slide[data-title="El socio que ejecuta"] .product-logo-chip.wide img{
+  max-height:18px;
+}
+.slide[data-title="El socio que ejecuta"] .product-group-card[data-count="4"] .product-logo-chip{
+  min-height:34px;
+  padding:5px 7px;
+}
+.slide[data-title="El socio que ejecuta"] .product-group-card[data-count="4"] .product-logo-chip img{
+  max-height:18px;
+}
+
+/* v35 — Slide 2 industries with category tags and improved spacing */
+.slide[data-title="El socio que ejecuta"] .industries-logo-grid{
+  grid-template-columns:repeat(5, minmax(0,1fr));
+  gap:14px;
+}
+.slide[data-title="El socio que ejecuta"] .industry-logo-card{
+  min-height:118px;
+  padding:12px 10px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  text-align:center;
+}
+.slide[data-title="El socio que ejecuta"] .industry-logo-shell{
+  flex:1;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+}
+.slide[data-title="El socio que ejecuta"] .industry-logo-card img{
+  max-width:84%;
+  max-height:36px;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 6px 12px rgba(0,0,0,.12));
+}
+.slide[data-title="El socio que ejecuta"] .industry-tag{
+  width:100%;
+  min-height:30px;
+  padding:6px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  border-radius:999px;
+  font-size:10.5px;
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:.01em;
+  color:#5b5d76;
+  background:linear-gradient(180deg, rgba(239,242,252,.98), rgba(230,234,247,.95));
+  border:1px solid rgba(162,169,202,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.65);
+}
+.slide[data-title="El socio que ejecuta"] .industry-faa img{max-height:28px; max-width:88%;}
+.slide[data-title="El socio que ejecuta"] .industry-uc img{max-height:30px; max-width:88%;}
+.slide[data-title="El socio que ejecuta"] .industry-royal-caribbean img{max-height:26px; max-width:82%;}
+.slide[data-title="El socio que ejecuta"] .industry-martin img{max-height:30px;}
+.slide[data-title="El socio que ejecuta"] .industry-freedom img{max-height:24px; max-width:86%;}
+.slide[data-title="El socio que ejecuta"] .industry-blackcart img{max-height:22px; max-width:78%;}
+.slide[data-title="El socio que ejecuta"] .industry-sony img{max-height:28px;}
+.slide[data-title="El socio que ejecuta"] .industry-google img{max-height:34px;}
+.slide[data-title="El socio que ejecuta"] .industry-att img{max-height:30px;}
+.slide[data-title="El socio que ejecuta"] .industry-thaioil img{max-height:26px;}
+.slide[data-title="El socio que ejecuta"] .industry-c40 img{max-height:34px;}
+.slide[data-title="El socio que ejecuta"] .industry-paypal img{max-height:34px;}
+@media (max-width: 1100px){
+  .slide[data-title="El socio que ejecuta"] .industries-logo-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+}
+
+/* v36 — Slides 3 & 4: stronger titles, removed labels, larger logos */
+.slide[data-title="Resultados que Hablan"] .proof-title,
+.slide[data-title="Datos confiables"] .proof-title{
+  margin-bottom:20px;
+}
+.slide[data-title="Resultados que Hablan"] .proof-title h2,
+.slide[data-title="Datos confiables"] .proof-title h2{
+  margin-top:0 !important;
+  font-size:58px !important;
+  line-height:1.02 !important;
+  font-weight:950 !important;
+  letter-spacing:-0.03em;
+}
+.slide[data-title="Resultados que Hablan"] .proof-pair,
+.slide[data-title="Datos confiables"] .proof-pair{
+  height:calc(100% - 86px);
+}
+.slide[data-title="Resultados que Hablan"] .card.proof,
+.slide[data-title="Datos confiables"] .card.proof{
+  grid-template-rows:112px 1fr auto auto !important;
+  gap:16px;
+  padding:24px 26px 26px;
+  justify-items:center;
+}
+.slide[data-title="Resultados que Hablan"] .card.proof > .logo,
+.slide[data-title="Datos confiables"] .card.proof > .logo{
+  height:102px !important;
+  max-width:82% !important;
+  object-fit:contain;
+  object-position:center center !important;
+  margin-inline:auto;
+  padding:12px 14px;
+  border-radius:18px;
+}
+.slide[data-title="Resultados que Hablan"] .card.proof .proof-metrics,
+.slide[data-title="Datos confiables"] .card.proof .proof-metrics,
+.slide[data-title="Resultados que Hablan"] .card.proof .anchor,
+.slide[data-title="Datos confiables"] .card.proof .anchor,
+.slide[data-title="Resultados que Hablan"] .card.proof .tagrow,
+.slide[data-title="Datos confiables"] .card.proof .tagrow{
+  width:100%;
+}
+
+/* v37 — requested label removals, centered titles, quickstart pricing updates */
+.slide[data-title="El comienzo"] .centered-title{
+  text-align:center !important;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+}
+.slide[data-title="Agentforce QuickStarts"] .qs-overview > div:first-child h2{
+  margin-top:0 !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .overview-stats{
+  grid-template-columns:repeat(2, minmax(220px, 300px)) !important;
+  justify-content:center !important;
+  align-items:start !important;
+  gap:24px !important;
+}
+.slide[data-title="Agentforce QuickStarts"] .overview-stat b{
+  white-space:nowrap;
+}
+.slide[data-title="Construyamos Pipeline"] h2{
+  margin-top:0 !important;
+}
+.slide[data-title="Construyamos Pipeline"] .workshop h3{
+  margin-top:0 !important;
+}
